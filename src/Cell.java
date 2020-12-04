@@ -25,4 +25,41 @@ public class Cell {
     public boolean getVisited() { return visited; }
     public boolean getRight() { return right; }
     public boolean getBottom() { return bottom; }
+
+
+    //toStrings
+    public String toStringTop(){
+        String print = "";
+        if(this.getVisited() == false){
+            if (this.getRight() == false){
+                print += "    ";
+            }
+            else{print += "   |";}
+        }
+        else{
+            if (this.getRight() == true){
+                print += " * |";
+            }
+            else{print += " *  ";}
+        }
+        return print;
+    }
+
+    public String toStringBot(){
+        String print = "";
+        if(this.getBottom() == true){
+            print += "---|";
+        }//bottom border
+        else{
+            print += "   |";
+        }
+        return print;
+    }
+
+
+
+
+
+
+
 }

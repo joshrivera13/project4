@@ -1,5 +1,11 @@
 // Names:Josh Rivera
 // x500s:river573
+/**
+ * Known Bugs:
+ * -Occasionally will create unsolvable mazes
+ * -On mazes that have more than 10 cells some cells will be unreachable but the maze can still be solved
+ *
+ */
 
 import java.util.Random;
 
@@ -170,17 +176,42 @@ public class MyMaze{
         return theMaze;
     }//makeMaze
 
-    /* TODO: Print a representation of the maze to the terminal */
     public void printMaze() {
-        String printedMaze = "";
-        for (int i = 0; i < maze.length; i++){
-            for (int j = 0; j < maze[0].length; j++){
-                //top row
-                if(i == 0){
-                    if()
+        String print = "|";
+        for(int i = 0; i < maze.length; i++){
+            if (i == 0){
+                print += "---|".repeat(maze[0].length);
+                print += "\n";
+            }
+            if (i > 0){
+                print += "\n";
+            }
+            for(int j = 0; j < maze[0].length; j++){
+                if (i == maze.length - 1 && j == maze[0].length - 1){
+                    if (maze[i][j].getVisited() == false){
+                        print += "    ";
+                    }
+                    else{print += " *  ";}
+                    continue;
                 }
-            }//inner
-        }//outer
+                if (j == 0 && i != 0){
+                    print += "|";
+                }
+                else if (j == 0 && i == 0){
+                    print += " ";
+                }
+                print += maze[i][j].toStringTop();
+            }
+            print += "\n";
+            for (int p = 0; p < maze[0].length; p++){
+                if (p == 0){
+                    print += "|";
+                }
+                print += maze[i][p].toStringBot();
+            }
+        }
+
+        System.out.println(print);
     }//printMaze
 
     /* TODO: Solve the maze using the algorithm found in the writeup. */
@@ -194,6 +225,9 @@ public class MyMaze{
     }
 
     public static void main(String[] args){
-        makeMaze(2, 2);
+        MyMaze test = makeMaze(3,3);
+        test.printMaze();
+
+
     }
 }
